@@ -25,7 +25,11 @@ Add to your app manifest.xml file
   
     <application
         ..............
-        tools:replace="android:label">  <!-- Add This line -->
+        <!-- Add This line -->
+        
+        tools:replace="android:label" 
+        android:requestLegacyExternalStorage="true"> <!-- Add This line if you are targeting android API 29+-->
+
         <activity>
             ...............
         </activity>

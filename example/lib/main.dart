@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _extractedLink = 'Loading...';
 
-  String youTube_link = "https://www.youtube.com/watch?v=nRhYQlg8fVw&t";
+  String youTube_link = "https://www.youtube.com/watch?v=nRhYQlg8fVw";
 
   @override
   void initState() {
@@ -29,7 +29,8 @@ class _MyAppState extends State<MyApp> {
     String link;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      link = await FlutterYoutubeDownloader.extractYoutubeLink(youTube_link);
+      link =
+          await FlutterYoutubeDownloader.extractYoutubeLink(youTube_link, 22);
     } on PlatformException {
       link = 'Failed to Extract YouTube Video Link.';
     }
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> downloadVideo() async {
     final result = await FlutterYoutubeDownloader.downloadVideo(
-        youTube_link, "Video Title goes Here...");
+        youTube_link, "Video Title goes Here...", 22);
     print(result);
   }
 

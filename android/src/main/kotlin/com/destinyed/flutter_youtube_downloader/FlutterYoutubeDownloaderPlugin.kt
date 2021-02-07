@@ -9,6 +9,7 @@ import androidx.annotation.NonNull
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
+import com.example.tubmate.Constants.DownloadManagerClass
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -42,6 +43,7 @@ class FlutterYoutubeDownloaderPlugin : FlutterPlugin, MethodCallHandler {
 
         val url = call.argument<String>("url")
         val title = call.argument<String>("title")
+        val iTag = call.argument<Int>("itag")
 
 
         when (call.method) {
@@ -58,11 +60,11 @@ class FlutterYoutubeDownloaderPlugin : FlutterPlugin, MethodCallHandler {
                             // 720, 1080, 480
                             // var iTags = listOf(22, 137, 18);
 
-                            val downloadUrl = ytFiles.get(18).url
+                            val downloadUrl = ytFiles.get(iTag!!).url
                             result.success(downloadUrl)
 
                         } else {
-                            result.error("Error", "Failed to get Url", "")
+                            result.error("Error", "Failed to get iTag Url", "")
                         }
 
                     }
@@ -71,7 +73,7 @@ class FlutterYoutubeDownloaderPlugin : FlutterPlugin, MethodCallHandler {
             }
             //Extract and download YouTube Video
             "downloadVideo" -> {
-                downloadVideo(url!!, title!!)
+                downloadVideo(url!!, title!!, iTag!!)
             }
             else -> {
                 result.notImplemented()
@@ -87,7 +89,7 @@ class FlutterYoutubeDownloaderPlugin : FlutterPlugin, MethodCallHandler {
     //Method responsible for extracting youtube link
     //This method will also call the DownloadManagerClass to download the
     //Youtube video after extracting the link
-    private fun downloadVideo(url: String, title: String) {
+    private fun downloadVideo(url: String, title: String, itag: Int) {
 
         @SuppressLint("StaticFieldLeak")
         val ytExtractor = object : YouTubeExtractor(activity) {
@@ -95,23 +97,29 @@ class FlutterYoutubeDownloaderPlugin : FlutterPlugin, MethodCallHandler {
                     ytFiles: SparseArray<YtFile>?,
                     videoMeta: VideoMeta?
             ) {
-                if (ytFiles != null) {
+                try {
+                    if (ytFiles != null) {
 
                     // 720, 1080, 480
                     // var iTags = listOf(22, 137, 18);
 
-                    val downloadUrl = ytFiles.get(18).url
+                    val downloadUrl = ytFiles.get(itag).url
 
                     DownloadManagerClass(activity).download(title, "Downloading...", downloadUrl)
-                    Toast.makeText(activity, "Video is downloading... Slide down to see progress", Toast.LENGTH_LONG).show()
+                    
 
 
                 } else {
                     Toast.makeText(
                             activity,
-                            "Invalid Url",
+                            "Invalid iTag Url",
                             Toast.LENGTH_LONG
                     ).show()
+                }
+                }
+                catch(e : Exception) {
+                    Toast.makeText(activity, "$e", Toast.LENGTH_LONG).show()
+                    print(e);
                 }
 
             }
