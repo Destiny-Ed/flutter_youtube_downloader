@@ -26,7 +26,7 @@ Add to your app manifest.xml file
     <application
         ..............
         <!-- Add This line -->
-        
+
         tools:replace="android:label" 
         android:requestLegacyExternalStorage="true"> <!-- Add This line if you are targeting android API 29+-->
 
@@ -60,7 +60,7 @@ Add to your app manifest.xml file
     class _MyAppState extends State<MyApp> {
       String _extractedLink = 'Loading...';
 
-      String youTube_link = "https://www.youtube.com/watch?v=nRhYQlg8fVw&t";
+      String youTube_link = "https://www.youtube.com/watch?v=nRhYQlg8fVw";
 
       @override
       void initState() {
@@ -73,7 +73,7 @@ Add to your app manifest.xml file
         String link;
         // Platform messages may fail, so we use a try/catch PlatformException.
         try {
-          link = await FlutterYoutubeDownloader.extractYoutubeLink(youTube_link);
+          link = await FlutterYoutubeDownloader.extractYoutubeLink(youTube_link, 18);
         } on PlatformException {
           link = 'Failed to Extract YouTube Video Link.';
         }
@@ -90,7 +90,7 @@ Add to your app manifest.xml file
 
       Future<void> downloadVideo() async {
         final result = await FlutterYoutubeDownloader.downloadVideo(
-            youTube_link, "Video Title goes Here...");
+            youTube_link, "Video Title goes Here...", 18);
         print(result);
       }
 

@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       link =
-          await FlutterYoutubeDownloader.extractYoutubeLink(youTube_link, 22);
+          await FlutterYoutubeDownloader.extractYoutubeLink(youTube_link, 18);
     } on PlatformException {
       link = 'Failed to Extract YouTube Video Link.';
     }
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> downloadVideo() async {
     final result = await FlutterYoutubeDownloader.downloadVideo(
-        youTube_link, "Video Title goes Here...", 22);
+        youTube_link, "Video Title goes Here...", 18);
     print(result);
   }
 
