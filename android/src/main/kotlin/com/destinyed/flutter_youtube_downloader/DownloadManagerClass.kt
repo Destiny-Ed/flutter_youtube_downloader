@@ -30,7 +30,7 @@ class DownloadManagerClass(val ctx: Context) {
 
             //Set the local destination for the downloaded file to a path within the application's external files directory
 //            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "$nTitle.mp4")
-            request.setDestinationInExternalFilesDir(ctx, Environment.DIRECTORY_DOWNLOADS, nTitle + "mp4")
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nTitle + "mp4")
             request.allowScanningByMediaScanner()
 
 
