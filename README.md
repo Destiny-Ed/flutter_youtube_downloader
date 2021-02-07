@@ -15,6 +15,26 @@ To use this plugin : *add the dependency to your [pubspec.yaml] file
         flutter_youtube_downloader:
 ```
 
+Add to your app manifest.xml file
+
+```xml
+  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">  <!-- Add This line -->
+    
+    ...........
+  
+    <application
+        ..............
+        tools:replace="android:label">  <!-- Add This line -->
+        <activity>
+            ...............
+        </activity>
+     
+    </application>
+</manifest>
+
+```
+
 ## How To Use
 
 ```dart
