@@ -23,14 +23,14 @@ class DownloadManagerClass(val ctx: Context) {
             request.setTitle(nTitle)
 
             //Setting description of request
-            request.setDescription("Your file is downloading")
+            request.setDescription(nDescription)
 
             //set notification when download completed
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
 
             //Set the local destination for the downloaded file to a path within the application's external files directory
 //            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "$nTitle.mp4")
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, nTitle + "mp4")
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"/" + nTitle + "mp4")
             request.allowScanningByMediaScanner()
 
 
@@ -40,7 +40,7 @@ class DownloadManagerClass(val ctx: Context) {
             Toast.makeText(ctx, "Video is downloading... Slide down to see progress", Toast.LENGTH_LONG).show()
 
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(ctx, "Download link is broken or not availale for download", Toast.LENGTH_LONG).show()
+            Toast.makeText(ctx, "${e.message} Download link is broken or not available for download", Toast.LENGTH_LONG).show()
 
         }
 

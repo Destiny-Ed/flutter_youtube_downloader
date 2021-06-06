@@ -5,3 +5,7 @@
 ## O.O.3
 
 * Added instruction for extrating and downloading video on Android API 29+
+
+## 0.0.4
+
+* Fixed 'Download link is broken or not available for download' Error

@@ -39,6 +39,18 @@ Add to your app manifest.xml file
 
 ```
 
+## Warning
+
+Make sure you don't add ...(dots) after the video title name
+
+[Example] Bad
+final result = await FlutterYoutubeDownloader.downloadVideo(
+            youTube_link, "Video Title goes Here...", 18);
+
+[Example] Good
+final result = await FlutterYoutubeDownloader.downloadVideo(
+            youTube_link, "Video Title goes Here", 18);
+
 ## How To Use
 
 ```dart
@@ -90,7 +102,7 @@ Add to your app manifest.xml file
 
       Future<void> downloadVideo() async {
         final result = await FlutterYoutubeDownloader.downloadVideo(
-            youTube_link, "Video Title goes Here...", 18);
+            youTube_link, "Video Title goes Here", 18);
         print(result);
       }
 

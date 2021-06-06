@@ -118,8 +118,9 @@ class FlutterYoutubeDownloaderPlugin : FlutterPlugin, MethodCallHandler {
                 }
                 }
                 catch(e : Exception) {
+                    print("This is the error message $e")
                     Toast.makeText(activity, "$e", Toast.LENGTH_LONG).show()
-                    print(e);
+                    print(e)
                 }
 
             }

@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> downloadVideo() async {
     final result = await FlutterYoutubeDownloader.downloadVideo(
-        youTube_link, "Video Title goes Here...", 18);
+        youTube_link, "Video Title goes Here", 18);
     print(result);
   }
 
