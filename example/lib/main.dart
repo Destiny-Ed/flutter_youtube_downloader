@@ -14,9 +14,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _extractedLink = 'Loading...';
+  String? _extractedLink = 'Loading...';
 
-  String youTube_link = "https://www.youtube.com/watch?v=nRhYQlg8fVw";
+  String? youTube_link = "https://www.youtube.com/watch?v=nRhYQlg8fVw";
 
   @override
   void initState() {
@@ -26,11 +26,12 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> extractYoutubeLink() async {
-    String link;
+    String? link;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       link =
-          await FlutterYoutubeDownloader.extractYoutubeLink(youTube_link, 18);
+          await (FlutterYoutubeDownloader.extractYoutubeLink(youTube_link!, 18)
+              as FutureOr<String?>);
     } on PlatformException {
       link = 'Failed to Extract YouTube Video Link.';
     }
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> downloadVideo() async {
     final result = await FlutterYoutubeDownloader.downloadVideo(
-        youTube_link, "Video Title goes Here", 18);
+        youTube_link!, "Video Title goes Here", 18);
     print(result);
   }
 

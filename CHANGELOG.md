@@ -9,3 +9,7 @@
 ## 0.0.4
 
 * Fixed 'Download link is broken or not available for download' Error
+
+## 0.0.5
+
+* Migrated to Null Safety
