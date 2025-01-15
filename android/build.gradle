@@ -1,16 +1,66 @@
-group 'com.destinyed.flutter_youtube_downloader'
-version '1.0-SNAPSHOT'
+// group 'com.destinyed.flutter_youtube_downloader'
+// version '1.0-SNAPSHOT'
+
+// buildscript {
+//     ext.kotlin_version = '1.8.22'
+//     repositories {
+//         google()
+//         jcenter()
+//     }
+
+//     dependencies {
+//         classpath 'com.android.tools.build:gradle:8.1.0'
+//         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//     }
+// }
+
+// rootProject.allprojects {
+//     repositories {
+//         google()
+//         jcenter()
+//         maven { url "https://jitpack.io" }
+//     }
+// }
+
+// apply plugin: 'com.android.library'
+// apply plugin: 'kotlin-android'
+
+// android {
+//     compileSdkVersion 35
+
+//     sourceSets {
+//         main.java.srcDirs += 'src/main/kotlin'
+//     }
+//     defaultConfig {
+//         minSdkVersion 16
+//     }
+//     lintOptions {
+//         disable 'InvalidPackage'
+//     }
+
+// }
+
+// dependencies {
+//     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+//     implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
+
+// }
+
+
+group = "com.destinyed.flutter_youtube_downloader"
+version = "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = "1.8.22"
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -22,27 +72,58 @@ rootProject.allprojects {
     }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-
-android {
-    compileSdkVersion 30
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
-    defaultConfig {
-        minSdkVersion 16
-    }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
 
-    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
+android {
+    namespace = "com.destinyed.flutter_youtube_downloader"
 
+    compileSdk = 35
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+        test.java.srcDirs += "src/test/kotlin"
+    }
+
+    defaultConfig {
+        minSdk = 16
+    }
+
+    dependencies {
+        testImplementation("org.jetbrains.kotlin:kotlin-test")
+        testImplementation("org.mockito:mockito-core:5.0.0")
+
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+        implementation 'com.github.HaarigerHarald:android-youtubeExtractor:v2.1.0'
+    }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
 }
